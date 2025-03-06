@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class YerbaMateTest {
 
-    YerbaMate yerbaMate = new YerbaMate("Guayaki", 16, 4.50, 165, 0);
+    YerbaMate yerbaMate = new YerbaMate("Guayaki", 16, 4.50, 65, 0);
     YerbaMate defaultYerbaMate = new YerbaMate();
     YerbaMate copy = new YerbaMate(yerbaMate);
     @Test
@@ -29,7 +29,7 @@ class YerbaMateTest {
 
     @Test
     void testEquals() {
-        assertEquals(true, yerbaMate.equals(new YerbaMate("Guayaki", 16, 4.50, 165, 0)));
+        assertEquals(true, yerbaMate.equals(new YerbaMate("Guayaki", 16, 4.50, 65, 0)));
         assertEquals(false, yerbaMate.equals(new YerbaMate()));
     }
 

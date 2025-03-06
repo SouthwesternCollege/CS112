@@ -1,117 +1,76 @@
 package lab03;
-/**
- * Represents a tea beverage, extending CaffeinatedBeverage.
- * Includes additional properties for brewing temperature.
- *
- * @author Charles Fator
- * @version 1.0
- *
- */
 public class Tea extends CaffeinatedBeverage {
+
+    /**INSTANCE VARIABLES**/
     private int brewTemp;
 
-    public static final int DEFAULT_BREW_TEMP = 100;
+    /**CONSTANTS**/
 
-    /**
-     * Constructs a new Tea with the specified attributes.
-     *
-     * @param name     the name of the tea
-     * @param ounces   the number of ounces in the tea (must be >= 0)
-     * @param price    the price of the tea (must be >= 0)
-     * @param brewTemp the brew temperature in Celsius (must be >= 0)
-     */
+    private final int DEFAULT_BREWTEMP = 0;
+
+    /**CONSTRUCTORS**/
+
+    /*Default constructor - uses super to get default CaffeinatedBeverage values and uses default brew temp */
+    public Tea() {
+        super();
+        this.brewTemp = DEFAULT_BREWTEMP;
+    }
+
+    /* Full constructor - takes String name, int ounces, double price (dollars), and int brewTemp (celsius). Checks that brewTemp is valid data (0 < brewTemp <= 100) */
     public Tea(String name, int ounces, double price, int brewTemp) {
         super(name, ounces, price);
-        if (brewTemp < 0) {
-            throw new IllegalArgumentException("Brew temperature must be non-negative.");
+        if (brewTemp > 0 && brewTemp <= 100) {
+            this.brewTemp = brewTemp;
         }
-        this.brewTemp = brewTemp;
-    }
-
-    /**
-     * Constructs a new Tea with default values.
-     */
-
-    public Tea() {
-        this(DEFAULT_NAME, 12, DEFAULT_PRICE, DEFAULT_BREW_TEMP);
-    }
-
-    /**
-     * Copy Constructer. Creates a new Tea object that is a copy of the given object.
-     *
-     * @param original the original Tea object to copy
-     */
-
-    public Tea(Tea original) {
-        if (original != null) {
-            this.setAll(original.getName(), original.getOunces(), original.getPrice(), original.getBrewTemp());
-        } else {
-            System.out.println("ERROR: trying to copy NULL Weapon object. Exiting program...");
+        else {
+            System.out.println("Invalid data. Shutting down program...");
             System.exit(0);
         }
-
     }
 
-    /**
-     * Gets the brew temperature of the tea.
-     *
-     * @return the brew temperature in Celsius
-     */
+    /*Copy constructor - uses CaffeinatedBeverage setAll() method to access instance variables and sets brewTemp to a given value */
+    public Tea(Tea other) {
+        super(other);
+        this.brewTemp = other.brewTemp;
+    }
+
+    /**GETTER(S)**/
+    /*getBrewTemp - returns brewTemp instance variable of a Tea object */
+
     public int getBrewTemp() {
-        return brewTemp;
+        return this.brewTemp;
     }
 
-    /**
-     * Sets the brew temperature of the tea.
-     *
-     * @param brewTemp the new brew temperature in Celsius (must be >= 0)
-     * @return {@code true} if brew temp is valid and set, {@code false} otherwise
-     */
-    public boolean setBrewTemp(int brewTemp) {
-        if (brewTemp >= 0) {
-            this.brewTemp = brewTemp;
+    /***SETTER(S)***/
+    /*setBrewwTemp - takes int as parameter and sets brewTemp equal to this parameter as long as it is greater than 0 (freezing point) and less than or equal to 100 (boiling point). Otherwise, exits with error message.*/
+    public boolean setBrewTemp(int newBrewTemp) {
+        if (newBrewTemp >= 0 ) {
+            this.brewTemp = newBrewTemp;
             return true;
-        } else {
+        }
+        else {
+            System.out.println("Invalid data.");
             return false;
         }
-
     }
 
-    /**
-     * Sets all fields of this CaffeinatedBeverage.
-     * @param name name of beverage
-     * @param ounces ounces for beverage
-     * @param price price of beverage
-     * @param brewTemp brew temp of beverage
-     * @return {@code true} if all fields were successfully set, {@code false} otherwise
-     */
-
-    public boolean setAll(String name, int ounces, double price, int brewTemp) {
-        return this.setName(name) && this.setOunces(ounces) && this.setPrice(price) && this.setBrewTemp(brewTemp);
-    }
-
-    /**
-     *
-     * Checks whether this object is equal to another object.
-     *
-     * @param o the object to compare to
-     * @return {@code true} if the objects are equal, {@code false} otherwise
-     */
-
-    @Override
-    public boolean equals(Object o) {
-        if (!super.equals(o)) return false;
-        Tea tea = (Tea) o;
-        return this.brewTemp == tea.brewTemp;
-    }
-
-    /**
-     * Returns a formated string representing a Tea.
-     * @return string representing Tea
-     */
+    /***OTHER METHODS***/
+    /*toString - outputs Tea values in String format */
 
     @Override
     public String toString() {
-        return String.format("Tea: %s, brewed @ %d°C", super.toString(), brewTemp);
+        return "Tea: " + this.getName() + ", " + this.getOunces() + " ounces, brewed at " + brewTemp
+                + " degrees Celsius, $" + this.getPrice();
+    }
+
+    /*Equals - checks that other object is an instance of Tea, is not null, and that all instance variables are equal */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || this.getClass() != other.getClass()) {
+            return false;
+        }
+        Tea that = (Tea) other;
+        return (this.getOunces() == that.getOunces() && Double.compare(this.getPrice(), that.getPrice()) == 0
+                && this.getName().equals(that.getName()) && this.brewTemp == that.brewTemp);
     }
 }

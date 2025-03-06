@@ -1,144 +1,73 @@
 package lab03;
-/**
- *  YerbaMate Class extends Tea
- *
- *  Stores data for YerbaMate.
- *
- * @author:Michael Garcia
- * @version: 1.1
- */
-
-/*
- * UML DIAGRAM:
- * -----------------------------------------------------------
- * YerbaMate
- * -----------------------------------------------------------
- * - numPasses : int
- * -----------------------------------------------------------
- * + YerbaMate()
- * + YerbaMate(name : string, ounces : int, price : double, brewTemp : int, numPasses : int)
- * + YerbaMate(name : string, ounces : int, price : double, brewTemp : int)
- * + YerbaMate(other : YerbaMate)
- * + setNumPasses(numPasses : int)
- * + getNumPasses()
- * + passMate()
- * + refill(ounces : int)
- * + equals (o : object) : Boolean
- * + toString()
- * -----------------------------------------------------------
- */
 public class YerbaMate extends Tea {
 
-    //INSTANCE VARIABLES
+    /***INSTANCE VARIABLES***/
     private int numPasses;
+    /*represents number of people who have drank from the same gourd when sharing a Mate in accordance with traditional customs */
 
-    /**
-     * Default constructor
-     */
-    public YerbaMate() {
-        super();
-        this.numPasses = 1;
-    }
+    /***CONSTANT(S)***/
+    private final int DEFAULT_NUMPASSES = 0;
 
-    /**
-     * Full Constructor
-     * @param name
-     * @param ounces
-     * @param price
-     * @param brewTemp
-     * @param numPasses
-     */
+    /***CONSTRUCTORS***/
+
+    /*Full constructor - takes naame, ounces, price, brewTemp, and numPasses and checks numPasses for validity */
     public YerbaMate(String name, int ounces, double price, int brewTemp, int numPasses) {
         super(name, ounces, price, brewTemp);
-        this.setNumPasses(numPasses);
-    }
-
-    /**
-     * OverLoaded Constructor
-     * @param name
-     * @param ounces
-     * @param price
-     * @param brewTemp
-     */
-    public YerbaMate(String name, int ounces, double price, int brewTemp) {
-        super(name, ounces, price, brewTemp);
-        this.setNumPasses(0); //Default value
-    }
-
-    /**
-     * Copy Constructor
-     * @param other
-     */
-    public YerbaMate(YerbaMate other) {
-        super(other.getName(), other.getOunces(), other.getPrice(), other.getBrewTemp());
-        this.setNumPasses(numPasses);
-    }
-
-    /**
-     * Setter for numPasses
-     * @param numPasses
-     * @return
-     */
-    public boolean setNumPasses(int numPasses) {
-        if(numPasses >= 0){
+        if (numPasses >= 0) {
             this.numPasses = numPasses;
-            return true;
-        }else{
-            return false;
+        }
+        else {
+            System.out.println("Error: invalid numPasses value given. Shutting down program...");
+            System.exit(0);
         }
     }
 
-    /**
-     * Getter for numPasses
-     * @return
-     */
-    public int getNumPasses() {
-        return numPasses;
+    /*Default constructor - creates YerbaMate object with all values set to defaults*/
+    public YerbaMate() {
+        super();
+        this.numPasses = DEFAULT_NUMPASSES;
     }
 
-    /**
-     * passMate
-     * Increments by 1 for each time the mate gets passed.
-     * prints a statment keeping track of times passed.
-     */
+    /*Copy constructor - uses other YerbaMate object for parameters and copies it.*/
+    public YerbaMate(YerbaMate other) {
+        super(other);
+        this.numPasses = other.numPasses;
+    }
+
+    /***OTHER METHODS***/
+
+    /*refill - takes input for number of ounces and adds it to the amount of ounces in the Yerba Mate already */
+    public void refill(int ouncesAdded) {
+        this.setOunces(this.getOunces() + ouncesAdded);
+    }
+
+    /*passMate - Increments numPasses and prints a notification that the mate was passes, along with the current pass count. */
     public void passMate() {
-        this.numPasses++;
-        System.out.printf("The mate has passed! There are currently %d passes.", this.numPasses);
+        this.numPasses += 1;
+        System.out.println("Mate was passed. " + numPasses + " passes so far.");
     }
 
-    /**
-     * Refill
-     * Refills the mate a certain amount of ounces
-     * @param ounces
-     */
-    public void refill(int ounces) {
-        if (ounces > 0) {
-            this.setOunces(this.getOunces() + ounces);
-        }
+    /*getNumPasses - returns number of passes so far */
+    public int getNumPasses() {
+        return this.numPasses;
     }
 
-    /**
-     * ToString
-     * @returns a String
-     */
+    /*toString - returns a string detailing all values of the Yerba Mate */
     @Override
     public String toString() {
-        String teaString = super.toString();
-        int colonlocation = teaString.indexOf(":");
-        teaString = teaString.substring(colonlocation + 2);
-
-        return String.format("YerbaMate: %s, %d passes so far", teaString, this.numPasses);
+        return "Yerba Mate: " + this.getName() + ", " + this.getOunces() + " ounces, brewed at " + this.getBrewTemp()
+                + " degrees Celsius, $" + this.getPrice() + ", " + this.numPasses + " passes so far.";
     }
 
-    /**
-     * Equals method
-     */
+    /**equals - returns true if object is an instance of Yerba Mate with the same values for all instance variables as the comparison. */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        YerbaMate yerbaMate = (YerbaMate) o;
-        return numPasses == yerbaMate.numPasses;
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+        YerbaMate that = (YerbaMate) other;
+        return (this.getName() == that.getName() && this.getOunces() == that.getOunces()
+                && this.getPrice() == that.getPrice() && this.getBrewTemp() == that.getBrewTemp()
+                && this.numPasses == that.numPasses);
     }
 }
