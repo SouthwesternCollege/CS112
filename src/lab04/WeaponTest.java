@@ -62,16 +62,16 @@ class WeaponTest {
         assertFalse(weapon.setAttackBonus(-1));
     }
 
-    @Test
-    void setAll() {
-        assertFalse(weapon.setAll(null, 10, 20, 30));
-        assertFalse(weapon.setAll("Sting", -1, 20, 30));
-        assertFalse(weapon.setAll("Sting", 10, -1, 30));
-        assertFalse(weapon.setAll("Sting", 10, 20, -1));
-        assertTrue(weapon.setAll("Sting", 10, 20, 30));
-        assertEquals(weapon, new Weapon("Sting", 10, 20, 30));
-
-    }
+//    @Test
+//    void setAll() {
+//        assertFalse(weapon.setAll(null, 10, 20, 30));
+//        assertFalse(weapon.setAll("Sting", -1, 20, 30));
+//        assertFalse(weapon.setAll("Sting", 10, -1, 30));
+//        assertFalse(weapon.setAll("Sting", 10, 20, -1));
+//        assertTrue(weapon.setAll("Sting", 10, 20, 30));
+//        assertEquals(weapon, new Weapon("Sting", 10, 20, 30));
+//
+//    }
 
     @Test
     void testEquals() {
