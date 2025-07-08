@@ -32,13 +32,13 @@ class CaffeinatedBeverageTest {
 
     @org.junit.jupiter.api.Test
     void setOunces() {
-        beverage.setOunces(20);
+        assertTrue (beverage.setOunces(20));
         assertEquals(20, beverage.getOunces());
     }
 
     @org.junit.jupiter.api.Test
     void setPrice() {
-        beverage.setPrice(4.50);
+        assertTrue(beverage.setPrice(4.50));
         assertEquals(4.50, beverage.getPrice());
     }
 
