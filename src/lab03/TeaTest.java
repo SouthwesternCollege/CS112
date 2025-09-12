@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit test for Tea class
  * @author Raul Soto
- * @version 0.0.α
+ * @version 0.1.α
  */
 class TeaTest {
 
