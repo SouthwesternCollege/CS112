@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Weapon class tester
+ * JUnit test for Weapon class
  * @author Raul Soto
+ * @version 0.0.α
  */
 class WeaponTest {
     Weapon weapon = new Weapon("Excalibur", 100, 50, 10);
@@ -15,68 +16,68 @@ class WeaponTest {
     Weapon copy = new Weapon(weapon);
 
     @Test
-    void getName() {
+    void testGetName() {
         assertEquals("Excalibur", weapon.getName());
     }
 
     @Test
-    void getDamage() {
+    void testGetDamage() {
         assertEquals(100, weapon.getDamage());
     }
 
     @Test
-    void getRange() {
+    void testGetRange() {
         assertEquals(50, weapon.getRange());
     }
 
     @Test
-    void getAttackBonus() {
+    void testGetAttackBonus() {
         assertEquals(10, weapon.getAttackBonus());
     }
 
     @Test
-    void setName() {
+    void testSetName() {
         assertTrue(weapon.setName("Sting"));
         assertEquals("Sting", weapon.getName());
         assertFalse(weapon.setName(null));
     }
 
     @Test
-    void setDamage() {
+    void testSetDamage() {
         assertTrue(weapon.setDamage(50));
         assertEquals(50, weapon.getDamage());
         assertFalse(weapon.setDamage(-1));
     }
 
     @Test
-    void setRange() {
+    void testSetRange() {
         assertTrue(weapon.setRange(80));
         assertEquals(80, weapon.getRange());
         assertFalse(weapon.setRange(-1));
     }
 
     @Test
-    void setAttackBonus() {
+    void testSetAttackBonus() {
         assertTrue(weapon.setAttackBonus(42));
         assertEquals(42, weapon.getAttackBonus());
         assertFalse(weapon.setAttackBonus(-1));
     }
 
-//    @Test
-//    void setAll() {
-//        assertFalse(weapon.setAll(null, 10, 20, 30));
-//        assertFalse(weapon.setAll("Sting", -1, 20, 30));
-//        assertFalse(weapon.setAll("Sting", 10, -1, 30));
-//        assertFalse(weapon.setAll("Sting", 10, 20, -1));
-//        assertTrue(weapon.setAll("Sting", 10, 20, 30));
-//        assertEquals(weapon, new Weapon("Sting", 10, 20, 30));
-//
-//    }
+    @Test
+    void testSetAll() {
+        assertFalse(weapon.setAll(null, 10, 20, 30));
+        assertFalse(weapon.setAll("Sting", -1, 20, 30));
+        assertFalse(weapon.setAll("Sting", 10, -1, 30));
+        assertFalse(weapon.setAll("Sting", 10, 20, -1));
+        assertTrue(weapon.setAll("Sting", 10, 20, 30));
+        assertEquals(weapon, new Weapon("Sting", 10, 20, 30));
+
+    }
 
     @Test
     void testEquals() {
-        assertTrue(weapon.equals(copy));
-        assertFalse(weapon.equals(defaultWeapon));
+        assertEquals(weapon, copy);
+        assertNotEquals(weapon, defaultWeapon);
     }
 
     @Test
