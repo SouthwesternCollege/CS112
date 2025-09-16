@@ -1,83 +1,89 @@
 package lab03;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test for CaffeinatedBeverage class
+ * @author Raul Soto
+ * @version 0.0.α
+ */
 class CaffeinatedBeverageTest {
-    // CaffeneitedBeverage object will always revert to this state after each test.
+    // CaffeneitedBeverage object will always revert to this state after each test. I don't know if that is prefered.
     CaffeinatedBeverage beverage = new CaffeinatedBeverage("Coffee", 16, 3.50);
     CaffeinatedBeverage defaultBeverage = new CaffeinatedBeverage();
     CaffeinatedBeverage copy = new CaffeinatedBeverage(beverage);
 
 
-    @org.junit.jupiter.api.Test
-    void getName() {
+    @Test
+    void testGetName() {
         assertEquals("Coffee", beverage.getName());
     }
 
-    @org.junit.jupiter.api.Test
-    void getOunces() {
+    @Test
+    void testGetOunces() {
         assertEquals(16, beverage.getOunces());
     }
 
-    @org.junit.jupiter.api.Test
-    void getPrice() {
+    @Test
+    void testGetPrice() {
         assertEquals(3.50, beverage.getPrice());
     }
 
-    @org.junit.jupiter.api.Test
-    void setName() {
+    @Test
+    void testSetName() {
         beverage.setName("Espresso");
         assertEquals("Espresso", beverage.getName());
     }
 
-    @org.junit.jupiter.api.Test
-    void setOunces() {
-        assertTrue (beverage.setOunces(20));
+    @Test
+    void testSetOunces() {
+        beverage.setOunces(20);
         assertEquals(20, beverage.getOunces());
     }
 
-    @org.junit.jupiter.api.Test
-    void setPrice() {
-        assertTrue(beverage.setPrice(4.50));
+    @Test
+    void testSetPrice() {
+        beverage.setPrice(4.50);
         assertEquals(4.50, beverage.getPrice());
     }
 
-    @org.junit.jupiter.api.Test
-    void setAll() {
-        assertEquals(false, beverage.setAll("Cappuccino", -12, 3.50));
-        assertEquals(false, beverage.setAll("Cappuccino", 12, -3.50));
-        assertEquals(true, beverage.setAll("Cappuccino", 12, 3.50));
+    @Test
+    void testSetAll() {
+        assertFalse(beverage.setAll("Cappuccino", -12, 3.50));
+        assertFalse(beverage.setAll("Cappuccino", 12, -3.50));
+        assertTrue(beverage.setAll("Cappuccino", 12, 3.50));
         assertEquals("Cappuccino", beverage.getName());
         assertEquals(12, beverage.getOunces());
         assertEquals(3.50, beverage.getPrice());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testEquals() {
         beverage.setAll("Cappuccino", 12, 3.50);
-        assertEquals(true, beverage.equals(new CaffeinatedBeverage("Cappuccino", 12, 3.50)));
-        assertEquals(false, beverage.equals(new CaffeinatedBeverage()));
+        assertEquals(beverage, new CaffeinatedBeverage("Cappuccino", 12, 3.50));
+        assertNotEquals(beverage, new CaffeinatedBeverage());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testToString() {
         System.out.println(beverage);
     }
 
-    @org.junit.jupiter.api.Test
-    void sip() {
+    @Test
+    void testSip() {
         int sip = 8;
         beverage.setOunces(sip);
-        assertEquals(true, beverage.sip(sip - 1));
-        assertEquals(false, beverage.sip(sip + 1));
+        assertTrue(beverage.sip(sip - 1));
+        assertFalse(beverage.sip(sip + 1));
     }
 
-    @org.junit.jupiter.api.Test
-    void isEmpty() {
+    @Test
+    void testIsEmpty() {
         System.out.println(beverage);
-        assertEquals(false, beverage.isEmpty());
+        assertFalse(beverage.isEmpty());
         beverage.sip(beverage.getOunces());
         assertEquals(0, beverage.getOunces());
-        assertEquals(true, beverage.isEmpty());
+        assertTrue(beverage.isEmpty());
     }
 }

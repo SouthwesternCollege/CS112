@@ -1,13 +1,13 @@
 package lab03;
-/**
- * Test for Tea class
- * @author Raul Soto
- */
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test for Tea class
+ * @author Raul Soto
+ * @version 0.1.α
+ */
 class TeaTest {
 
     // Tea object will revert to this state after each test.
@@ -16,38 +16,38 @@ class TeaTest {
     Tea copy = new Tea(tea);
 
     @Test
-    void getBrewTemp() {
+    void testGetBrewTemp() {
         assertEquals(80, tea.getBrewTemp());
     }
 
     @Test
-    void setBrewTemp() {
-        assertEquals(false, tea.setBrewTemp(-1));
-        assertEquals(true, tea.setBrewTemp(75));
+    void testSetBrewTemp() {
+        assertFalse(tea.setBrewTemp(-1));
+        assertTrue(tea.setBrewTemp(75));
         assertEquals(75, tea.getBrewTemp());
     }
 
-//    @Test
-//    void setAll() {
-//        assertEquals(false, tea.setAll("Chamomile", -10, 2.00, 170));
-//        assertEquals(false, tea.setAll("Chamomile", 10, -2.00, 170));
-//        assertEquals(false, tea.setAll("Chamomile", 10, 2.00, -170));
-//        assertEquals(true, tea.setAll("Chamomile", 10, 2.00, 170));
-//        assertEquals("Chamomile", tea.getName());
-//        assertEquals(10, tea.getOunces());
-//        assertEquals(2.00, tea.getPrice());
-//        assertEquals(170, tea.getBrewTemp());
-//    }
+    @Test
+    void testSetAll() {
+        assertFalse(tea.setAll("Chamomile", -10, 2.00, 170));
+        assertFalse(tea.setAll("Chamomile", 10, -2.00, 170));
+        assertFalse(tea.setAll("Chamomile", 10, 2.00, -170));
+        assertTrue(tea.setAll("Chamomile", 10, 2.00, 170));
+        assertEquals("Chamomile", tea.getName());
+        assertEquals(10, tea.getOunces());
+        assertEquals(2.00, tea.getPrice());
+        assertEquals(170, tea.getBrewTemp());
+    }
 
 
     @Test
     void testEquals() {
-        assertEquals(true, tea.equals(new Tea("Earl Grey", 12, 2.50, 80)));
-        assertEquals(false, tea.equals(new Tea()));
+        assertEquals(tea, new Tea("Earl Grey", 12, 2.50, 80));
+        assertNotEquals(tea, new Tea());
     }
 
     @Test
     void testToString() {
-        System.out.println(tea);
+        assertTrue(tea.toString().contains("Earl Grey"));
     }
 }

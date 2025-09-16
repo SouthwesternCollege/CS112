@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DwarfTest {
     Weapon axe = new Weapon("Axe", 85, 5, 15);
-    Dwarf dwarf = new Dwarf("Gimli","Dwarf", "chaotic good", 100, 50, 100, 80, axe, null);
+    Dwarf dwarf = new Dwarf("Gimli","Fighter", "Chaotic Good", 100, 50, 100, 80, axe, null);
     Dwarf defaultDwarf = new Dwarf();
     Dwarf dwarfCopy = new Dwarf(dwarf);
 
@@ -17,12 +17,12 @@ class DwarfTest {
 
     @Test
     void getCharacterClass() {
-//        assertEquals("DWARF", dwarf.getCharacterClass().toUpperCase());
+        assertEquals("fighter", dwarf.getCharacterClass().toLowerCase());
     }
 
     @Test
     void getAlignment() {
-        assertEquals("chaotic good", dwarf.getAlignment());
+        assertEquals("Chaotic Good", dwarf.getAlignment());
     }
 
     @Test
@@ -64,8 +64,8 @@ class DwarfTest {
 
     @Test
     void setAlignment() {
-        assertTrue(dwarf.setAlignment("chaotic good"));
-        assertEquals("chaotic good", dwarf.getAlignment());
+        assertTrue(dwarf.setAlignment("Chaotic Good"));
+        assertEquals("Chaotic Good", dwarf.getAlignment());
         assertFalse(dwarf.setAlignment(""));
         assertFalse(dwarf.setAlignment(null));
     }
@@ -93,14 +93,13 @@ class DwarfTest {
 
     @Test
     void setWeapon1() {
-        dwarf.setWeapon1(null);
+        assertTrue(dwarf.setWeapon1(null));
         assertNull(dwarf.getWeapon1());
-
     }
 
     @Test
     void setWeapon2() {
-        dwarf.setWeapon1(new Weapon());
+        assertTrue(dwarf.setWeapon1(new Weapon()));
         assertEquals(new Weapon(), dwarf.getWeapon1());
     }
 
@@ -124,8 +123,8 @@ class DwarfTest {
 
     @Test
     void testEquals() {
-        assertTrue(dwarfCopy.equals(dwarf));
-        assertFalse(defaultDwarf.equals(dwarf));
+        assertEquals(dwarfCopy, dwarf);
+        assertNotEquals(defaultDwarf, dwarf);
     }
 
     @Test

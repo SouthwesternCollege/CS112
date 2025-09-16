@@ -1,9 +1,13 @@
 package lab05;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test for Pokemon, PokemonBox, and PokemonAlreadyExistsException classes
+ * @author Raul Soto
+ * @version 0.0.α
+ */
 class PokemonTest {
     Pokemon[] caught = {
             new Pokemon("Pikachu", "Electric"),
@@ -33,11 +37,9 @@ class PokemonTest {
     @Test
     void pokemonBoxGetPokemonTest() {
         PokemonBox pokeBox = new PokemonBox(caught);
+        assertThrows(IndexOutOfBoundsException.class, () -> pokeBox.getPokemon(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            pokeBox.getPokemon(-1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            pokeBox.getPokemon(pokeBox.getNumCaught() * 2);
+            pokeBox.getPokemon(pokeBox.getNumCaught() + 1);
         });
         assertDoesNotThrow(() -> pokeBox.getPokemon(0));
     }
