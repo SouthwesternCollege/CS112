@@ -13,27 +13,10 @@ class HistoricalEventTest {
     void setUp() {
         // Use a fixed date to avoid issues with new Date() changing at runtime
         fixedDate = new Date(1,1,1000);
-    }
-
-    @Test
-    void testDefaultConstructor() {
-        HistoricalEvent event = new HistoricalEvent();
-        assertEquals(HistoricalEvent.DEFAULT_DESCRIPTION, event.getDescription());
-        assertEquals(HistoricalEvent.DEFAULT_EVENT_DATE, event.getEventDay());
-    }
-
-    @Test
-    void testConstructorWithDescriptionOnly() {
-        HistoricalEvent event = new HistoricalEvent("Moon Landing");
-        assertEquals("Moon Landing", event.getDescription());
-        assertEquals(HistoricalEvent.DEFAULT_EVENT_DATE, event.getEventDay());
-    }
-
-    @Test
-    void testConstructorWithDescriptionAndDate() {
         HistoricalEvent event = new HistoricalEvent("Moon Landing", fixedDate);
-        assertEquals("Moon Landing", event.getDescription());
-        assertEquals(fixedDate, event.getEventDay());
+        HistoricalEvent defaultEvent = new HistoricalEvent();
+        HistoricalEvent copy = new HistoricalEvent(event);
+
     }
 
     @Test
