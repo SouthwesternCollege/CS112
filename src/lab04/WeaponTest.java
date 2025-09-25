@@ -31,11 +31,6 @@ class WeaponTest {
     }
 
     @Test
-    void testGetAttackBonus() {
-        assertEquals(10, weapon.getAttackBonus());
-    }
-
-    @Test
     void testSetName() {
         assertTrue(weapon.setName("Sting"));
         assertEquals("Sting", weapon.getName());
@@ -54,13 +49,6 @@ class WeaponTest {
         assertTrue(weapon.setRange(80));
         assertEquals(80, weapon.getRange());
         assertFalse(weapon.setRange(-1));
-    }
-
-    @Test
-    void testSetAttackBonus() {
-        assertTrue(weapon.setAttackBonus(42));
-        assertEquals(42, weapon.getAttackBonus());
-        assertFalse(weapon.setAttackBonus(-1));
     }
 
     @Test

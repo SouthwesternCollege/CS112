@@ -11,47 +11,47 @@ class DwarfTest {
     Dwarf dwarfCopy = new Dwarf(dwarf);
 
     @Test
-    void getName() {
+    void testGetName() {
         assertEquals("Gimli", dwarf.getName());
     }
 
     @Test
-    void getCharacterClass() {
-        assertEquals("fighter", dwarf.getCharacterClass().toLowerCase());
+    void testClassType() {
+        assertEquals("fighter", dwarf.getClassType().toLowerCase());
     }
 
     @Test
-    void getAlignment() {
+    void testGetAlignment() {
         assertEquals("Chaotic Good", dwarf.getAlignment());
     }
 
     @Test
-    void getExpPoints() {
+    void testGetExpPoints() {
         assertEquals(50, dwarf.getExpPoints());
     }
 
     @Test
-    void getHitPoints() {
+    void testGetHitPoints() {
         assertEquals(100, dwarf.getHitPoints());
     }
 
     @Test
-    void getArmorClass() {
+    void testGetArmorClass() {
         assertEquals(80, dwarf.getArmorClass());
     }
 
     @Test
-    void getWeapon1() {
+    void testGetWeapon1() {
         assertEquals(axe, dwarf.getWeapon1());
     }
 
     @Test
-    void getWeapon2() {
+    void testGetWeapon2() {
         assertNull(dwarf.getWeapon2());
     }
 
     @Test
-    void setName() {
+    void testSetName() {
         assertTrue(dwarf.setName("Durin"));
         assertEquals("Durin", dwarf.getName());
         assertFalse(dwarf.setName(""));
@@ -59,7 +59,7 @@ class DwarfTest {
     }
 
     @Test
-    void setCharacterClass() {
+    void testSetCharacterType() {
     }
 
     @Test
